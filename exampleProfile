@@ -4,5 +4,6 @@ for file in libs/*; do
 . "$file"
 done
 
-packages \
-    $packagesDevelopment $packagesDesktop $packagesWork $packagesCommandLine
+installChrome
+
+packages $packagesDevelopment $packagesDesktop $packagesWork $packagesCommandLine $packagesOffice
