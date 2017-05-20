@@ -1,12 +1,13 @@
 #!/bin/bash
 
+# Pull in libraries.
 startDir=`pwd`
 for file in `ls -1 libs/*| sort`; do
 . "$startDir/$file"
 done
 
+# Install stuff.
 preFetchChrome
-
 packages $packagesDevelopment $packagesDesktop $packagesWork $packagesCommandLine $packagesOffice $packagesChromePrereqs
-
 installChrome
+
