@@ -2,6 +2,6 @@
 
 function packages
 {
-    echo "Will install: $1"
-    apt-get install -y "$1"
+    echo "Packages: Will install: $@"
+    apt-get install -y "$@"
 }

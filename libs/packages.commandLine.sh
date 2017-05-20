@@ -1,3 +1,3 @@
 # This file contains packages I use for developing stuff.
 
-packagesDevelopment="kate kwrite python-pip"
+packagesCommandLine="openssh-server nmon htop"
