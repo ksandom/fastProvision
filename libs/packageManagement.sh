@@ -6,4 +6,5 @@ function packages
     echo "Packages: Will install: $@"
     apt-get update
     apt-get install -y "$@"
+    apt-get --fix-broken install -y
 }

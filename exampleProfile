@@ -4,6 +4,8 @@ for file in libs/*; do
 . "$file"
 done
 
-installChrome
+preFetchChrome
 
-packages $packagesDevelopment $packagesDesktop $packagesWork $packagesCommandLine $packagesOffice
+packages $packagesDevelopment $packagesDesktop $packagesWork $packagesCommandLine $packagesOffice $packagesChromePrereqs
+
+installChrome
