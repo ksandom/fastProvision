@@ -1,7 +1,8 @@
 #!/bin/bash
 
-for file in libs/*; do
-. "$file"
+startDir=`pwd`
+for file in `ls -1 libs/*| sort`; do
+. "$startDir/$file"
 done
 
 preFetchChrome
