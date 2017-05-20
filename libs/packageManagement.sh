@@ -4,5 +4,6 @@
 function packages
 {
     echo "Packages: Will install: $@"
+    apt-get update
     apt-get install -y "$@"
 }
