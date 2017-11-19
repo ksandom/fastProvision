@@ -1,0 +1,10 @@
+#!/bin/bash
+# Build a devuan chroot using debootstrap.
+
+. .fpStarter
+
+packages=`chrootPackages $packagesDevelopment $packagesDesktop $packagesWork $packagesCommandLine $packagesOffice $packagesChromePrereqs`
+echo $packages
+
+chrootBuildAll
+

@@ -1,0 +1,9 @@
+#!/bin/bash
+# Build a devuan chroot using debootstrap.
+
+. .fpStarter
+
+packages="make,gcc,less,vim,netbase,wget,binutils,dpkg,apt,apt-utils,,e2fsprogs"
+
+chrootBuildAll
+
