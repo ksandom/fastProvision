@@ -13,7 +13,7 @@ else
 fi
 export blocks="2K"
 export blockSize="1M"
-export bareMinimumPackages="make,gcc,less,vim,netbase,wget,binutils,dpkg,apt,apt-utils,nmon,e2fsprogs"
+export bareMinimumPackages="make,gcc,less,vim,netbase,wget,binutils,apt,apt-utils,nmon"
 
 mkdir -p "$mountPoint" "$imageHome"
 
