@@ -1,23 +1,24 @@
 #!/bin/bash
 # Build a devuan chroot using debootstrap.
 
-# Bare bones pre-requites
-export now="`date +%Y-%m-%d--%H%M%S`"
-export mountPoint="~/chroots/build/$now"
-export chrootImageHome="~/chroots/chrootImages"
-
-if [ "$chrootLabel" == "" ]; then
-	export chrootImage="$chrootImageHome/$now.img"
-else
-	export chrootImage="$chrootImageHome/$now-$chrootLabel-$arch.img"
-fi
-export blocks="2K"
-export blockSize="1M"
-export bareMinimumPackages="make,gcc,less,vim,netbase,wget,binutils,apt,apt-utils,nmon"
-export arch="armhf"
-
-mkdir -p "$mountPoint" "$chrootImageHome"
-
+function chrootPrerequisites
+{
+	export arch="armhf"
+	export now="`date +%Y-%m-%d--%H%M%S`"
+	export mountPoint=~/chroots/build/$now
+	export chrootImageHome=~/chroots/images
+	
+	if [ "$chrootLabel" == "" ]; then
+		export chrootImage="$chrootImageHome/$now.img"
+	else
+		export chrootImage="$chrootImageHome/$now-$chrootLabel-$arch.img"
+	fi
+	export blocks="2K"
+	export blockSize="1M"
+	export bareMinimumPackages="make,gcc,less,vim,netbase,wget,binutils,apt,apt-utils,nmon"
+	
+	mkdir -p "$mountPoint" "$chrootImageHome"
+}
 
 function chrootVars
 {
@@ -36,7 +37,6 @@ function chrootGetVars
 	for varName in chrootImage packages arch blocks blockSize;do
 		echo "$varName "${!varName}
 	done
-	exit 1
 }
 
 function chrootPackages
@@ -89,6 +89,7 @@ function chrootCompress
 
 function chrootBuildAll
 {
+	chrootPrerequisites
 	chrootCreateBareImage
 	sleep 2
 	chrootMountImage
