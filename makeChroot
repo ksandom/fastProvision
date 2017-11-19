@@ -1,0 +1,54 @@
+#!/bin/bash
+# Build a devuan chroot using debootstrap.
+
+packages="make,gcc,less,vim,netbase,wget,binutils,dpkg,apt,apt-utils,,e2fsprogs"
+
+# Bare bones pre-requites
+now="`date +%Y-%m-%d--%H%M%S`"
+mountPoint="chroots/build/$now"
+imageHome="chroots/images"
+image="$imageHome/$now.img"
+mkdir -p "$mountPoint" "$imageHome"
+blocks="2K"
+blockSize="1M"
+
+function createBareImage
+{
+	echo "Create image."
+	dd if=/dev/zero of="$image" bs="$blockSize" count=1 seek="$blocks" && \
+	mkfs.ext4 "$image"
+
+	return $?
+}
+
+function mountImage
+{
+	echo "Mount"
+	mount -o loop "$image" "$mountPoint"
+	
+	return $?
+}
+
+function buildContents
+{
+	echo "Build"
+	debootstrap --no-check-gpg --include="$packages" --arch "armel" "jessie" "$mountPoint" "http://auto.mirror.devuan.org/merged/"
+
+	return $?
+}
+
+function umountImage
+{
+	echo "Unmount"
+	umount "$mountPoint"
+
+	return $?
+}
+
+
+# Do everything
+createBareImage && \
+mountImage && \
+buildContents 
+umountImage
+
