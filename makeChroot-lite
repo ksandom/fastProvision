@@ -8,6 +8,7 @@ chrootLabel="devuan-lite"
 packages="make,gcc,less,vim,netbase,wget,binutils,dpkg,apt,apt-utils,,e2fsprogs"
 
 chrootVars
-sleep 1
 chrootBuildAll
+
+chrootVars
 

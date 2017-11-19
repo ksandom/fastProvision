@@ -23,7 +23,7 @@ function chrootPrerequisites
 function chrootVars
 {
 	echo "Chroot vars:"
-	chrootGetVars | chrootPrettyTable
+	chrootGetVars  #  | chrootPrettyTable
 	echo
 }
 
@@ -35,7 +35,7 @@ function chrootPrettyTable
 function chrootGetVars
 {
 	for varName in chrootImage packages arch blocks blockSize;do
-		echo "$varName "${!varName}
+		echo "$varName    "${!varName}
 	done
 }
 

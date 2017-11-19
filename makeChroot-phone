@@ -10,3 +10,5 @@ packages=`chrootPackages $packagesDevelopment $packagesDesktop $packagesWork $pa
 chrootVars
 chrootBuildAll
 
+chrootVars
+
