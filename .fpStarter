@@ -1,0 +1,7 @@
+# Pull in libraries.
+startDir=`pwd`
+for file in `ls -1 libs/*| sort`; do
+. "$startDir/$file"
+done
+
+
