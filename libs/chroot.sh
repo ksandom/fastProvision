@@ -3,19 +3,20 @@
 
 # Bare bones pre-requites
 export now="`date +%Y-%m-%d--%H%M%S`"
-export mountPoint="chroots/build/$now"
-export imageHome="chroots/images"
+export mountPoint="~/chroots/build/$now"
+export chrootImageHome="~/chroots/chrootImages"
 
 if [ "$chrootLabel" == "" ]; then
-	export image="$imageHome/$now.img"
+	export chrootImage="$chrootImageHome/$now.img"
 else
-	export image="$imageHome/$now-$chrootLabel.img"
+	export chrootImage="$chrootImageHome/$now-$chrootLabel-$arch.img"
 fi
 export blocks="2K"
 export blockSize="1M"
 export bareMinimumPackages="make,gcc,less,vim,netbase,wget,binutils,apt,apt-utils,nmon"
+export arch="armhf"
 
-mkdir -p "$mountPoint" "$imageHome"
+mkdir -p "$mountPoint" "$chrootImageHome"
 
 
 function chrootVars
@@ -32,9 +33,10 @@ function chrootPrettyTable
 
 function chrootGetVars
 {
-	for varName in image packages blocks blockSize;do
+	for varName in chrootImage packages arch blocks blockSize;do
 		echo "$varName "${!varName}
 	done
+	exit 1
 }
 
 function chrootPackages
@@ -44,14 +46,14 @@ function chrootPackages
 
 function chrootGetImage
 {
-	echo "$image"
+	echo "$chrootImage"
 }
 
 function chrootCreateBareImage
 {
-	echo "Create image."
-	dd if=/dev/zero of="$image" bs="$blockSize" count=1 seek="$blocks" && \
-	mkfs.ext4 "$image"
+	echo "Create chrootImage."
+	dd if=/dev/zero of="$chrootImage" bs="$blockSize" count=1 seek="$blocks" && \
+	mkfs.ext4 "$chrootImage"
 
 	return $?
 }
@@ -59,7 +61,7 @@ function chrootCreateBareImage
 function chrootMountImage
 {
 	echo "Mount"
-	mount -o loop "$image" "$mountPoint"
+	mount -o loop "$chrootImage" "$mountPoint"
 	
 	return $?
 }
@@ -67,7 +69,7 @@ function chrootMountImage
 function chrootBuildContents
 {
 	echo "Build"
-	debootstrap --no-check-gpg --include="$packages" --arch "armel" "jessie" "$mountPoint" "http://auto.mirror.devuan.org/merged/"
+	debootstrap --no-check-gpg --include="$packages" --arch "$arch" "jessie" "$mountPoint" "http://auto.mirror.devuan.org/merged/"
 
 	return $?
 }
@@ -82,14 +84,17 @@ function chrootUmountImage
 
 function chrootCompress
 {
-	gzip "$image"
+	gzip "$chrootImage"
 }
 
 function chrootBuildAll
 {
 	chrootCreateBareImage
+	sleep 2
 	chrootMountImage
+	sleep 2
 	chrootBuildContents
+	sleep 2
 	chrootUmountImage
 }
 
