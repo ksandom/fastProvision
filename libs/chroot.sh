@@ -5,13 +5,37 @@
 export now="`date +%Y-%m-%d--%H%M%S`"
 export mountPoint="chroots/build/$now"
 export imageHome="chroots/images"
-export image="$imageHome/$now.img"
+
+if [ "$chrootLabel" == "" ]; then
+	export image="$imageHome/$now.img"
+else
+	export image="$imageHome/$now-$chrootLabel.img"
+fi
 export blocks="2K"
 export blockSize="1M"
 export bareMinimumPackages="make,gcc,less,vim,netbase,wget,binutils,dpkg,apt,apt-utils,nmon,e2fsprogs"
 
 mkdir -p "$mountPoint" "$imageHome"
 
+
+function chrootVars
+{
+	echo "Chroot vars:"
+	chrootGetVars | chrootPrettyTable
+	echo
+}
+
+function chrootPrettyTable
+{
+	column -s\	 -t | while read in;do echo "  $in";done
+}
+
+function chrootGetVars
+{
+	for varName in image packages blocks blockSize;do
+		echo "$varName "${!varName}
+	done
+}
 
 function chrootPackages
 {

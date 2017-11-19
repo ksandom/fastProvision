@@ -1,10 +1,12 @@
 #!/bin/bash
 # Build a devuan chroot using debootstrap.
 
+chrootLabel="devuan-phone"
+
 . .fpStarter
 
-packages=`chrootPackages $packagesDevelopment $packagesDesktop $packagesWork $packagesCommandLine $packagesOffice $packagesChromePrereqs`
-echo $packages
+packages=`chrootPackages $packagesDevelopment $packagesDesktop $packagesWork $packagesCommandLine $packagesOffice $packagesChromePrereqs $packagesVNCServeri $packagesKDE`
 
+chrootVars
 chrootBuildAll
 
