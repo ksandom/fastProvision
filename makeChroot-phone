@@ -5,7 +5,7 @@ chrootLabel="devuan-phone"
 
 . .fpStarter
 
-packages=`chrootPackages $packagesDevelopment $packagesDesktop $packagesWork $packagesCommandLine $packagesOffice $packagesChromePrereqs $packagesVNCServeri $packagesKDE`
+packages=`chrootPackages $packagesDevuan $packagesDevelopment $packagesDesktopDevuan $packagesWork $packagesCommandLine $packagesChromePrereqs $packagesVNCServer $packagesKDE $packagesOffice`
 
 chrootVars
 chrootBuildAll
