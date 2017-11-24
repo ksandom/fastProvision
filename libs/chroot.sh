@@ -84,6 +84,7 @@ function chrootUmountImage
 
 function chrootCompress
 {
+	echo "Compress"
 	gzip "$chrootImage"
 }
 
@@ -95,8 +96,8 @@ function chrootBuildAll
 	chrootMountImage
 	sleep 2
 	chrootBuildContents
-	sleep 2
 	chrootUmountImage
+	chrootCompress
 }
 
 
