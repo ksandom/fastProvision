@@ -13,9 +13,9 @@ function chrootPrerequisites
 	else
 		export chrootImage="$chrootImageHome/$now-$chrootLabel-$arch.img"
 	fi
-	export blocks="2K"
+	export blocks="4K"
 	export blockSize="1M"
-	export bareMinimumPackages="make,gcc,less,vim,netbase,wget,binutils,apt,apt-utils,nmon"
+	export bareMinimumPackages="make,gcc,less,vim,netbase,wget,binutils,apt,apt-utils,nmon,aptitude"
 	
 	mkdir -p "$mountPoint" "$chrootImageHome"
 }
