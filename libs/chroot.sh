@@ -124,6 +124,7 @@ function chrootBuildAll
 	chrootMountExtras
 	export DEBIAN_FRONTEND=noninteractive
 	chrootKDETasksel
+	chrootRun apt-get clean -y
 	chrootUnMountExtras
 
 	# Cleanup
