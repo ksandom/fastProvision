@@ -15,9 +15,14 @@ function chrootPrerequisites
 	fi
 	export blocks="4K"
 	export blockSize="1M"
-	export bareMinimumPackages="make,gcc,less,vim,netbase,wget,binutils,apt,apt-utils,nmon,aptitude"
+	export bareMinimumPackages="make,gcc,less,vim,netbase,wget,binutils,apt,apt-utils,nmon,aptitude,tasksel,curl"
 	
 	mkdir -p "$mountPoint" "$chrootImageHome"
+}
+
+function chrootRun
+{
+	chroot "$mountPoint" "$@"
 }
 
 function chrootVars
@@ -41,6 +46,7 @@ function chrootGetVars
 
 function chrootPackages
 {
+	chrootPrerequisites
 	echo "$bareMinimumPackages,`echo $@ | sed 's/ /,/g'`"
 }
 
@@ -96,6 +102,7 @@ function chrootBuildAll
 	chrootMountImage
 	sleep 2
 	chrootBuildContents
+	chrootKDETasksel
 	chrootUmountImage
 	chrootCompress
 }
