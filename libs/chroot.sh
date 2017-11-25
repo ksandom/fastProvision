@@ -94,15 +94,39 @@ function chrootCompress
 	gzip "$chrootImage"
 }
 
+function chrootMountExtras
+{
+	for fs in /dev /dev/pts /proc /sys; do
+		mount -o bind $fs $mountPoint$fs
+	done
+}
+
+function chrootUnMountExtras
+{
+	for fs in /dev/pts /dev /proc /sys; do
+		mount -o bind $fs $mountPoint$fs
+	done
+}
+
 function chrootBuildAll
 {
+	# Prepare
 	chrootPrerequisites
 	chrootCreateBareImage
 	sleep 2
 	chrootMountImage
 	sleep 2
+
+	# Main build
 	chrootBuildContents
+
+	# Post build extras
+	chrootMountExtras
+	export DEBIAN_FRONTEND=noninteractive
 	chrootKDETasksel
+	chrootUnMountExtras
+
+	# Cleanup
 	chrootUmountImage
 	chrootCompress
 }
