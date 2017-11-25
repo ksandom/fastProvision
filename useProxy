@@ -1,0 +1,5 @@
+# To use the squid proxy to speed up installs run the following command.
+# . useProxy
+
+export http_proxy=http://localhost:3128/
+
