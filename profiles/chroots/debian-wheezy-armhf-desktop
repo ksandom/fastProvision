@@ -6,6 +6,7 @@ chrootLabel="devuan-phone"
 . .fpStarter
 
 chrootRelease="wheezy"
+chrootMirror=""
 packages=`chrootPackages $packagesDevuan $packagesDevelopment $packagesDesktopDevuan $packagesWork $packagesCommandLine $packagesChromePrereqs $packagesVNCServer $packagesKDE`
 
 chrootVars
