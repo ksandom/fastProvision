@@ -7,7 +7,7 @@ chrootLabel="debian-phone"
 
 chrootRelease="wheezy"
 chrootMirror=""
-packages=`chrootPackages $packagesDevuan $packagesDevelopment $packagesDesktopDebianWheezy $packagesWorkDebianWheezy $packagesCommandLine $packagesChromePrereqs $packagesVNCServer $packagesKDE`
+packages=`chrootPackages $packagesDevelopment $packagesDesktopDebianWheezy $packagesWorkDebianWheezy $packagesCommandLine $packagesChromePrereqs $packagesVNCServer $packagesKDE`
 
 chrootVars
 chrootBuildAll
