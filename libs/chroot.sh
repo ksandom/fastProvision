@@ -122,18 +122,18 @@ function chrootBuildAll
 	sleep 2
 
 	# Main build
-	chrootBuildContents
+	if chrootBuildContents; then
+		# Post build extras
+		chrootMountExtras
+		export DEBIAN_FRONTEND=noninteractive
+		chrootKDETasksel
+		chrootRun apt-get clean -y
+		chrootUnMountExtras
 
-	# Post build extras
-	chrootMountExtras
-	export DEBIAN_FRONTEND=noninteractive
-	chrootKDETasksel
-	chrootRun apt-get clean -y
-	chrootUnMountExtras
-
-	# Cleanup
-	chrootUmountImage
-	chrootCompress
+		# Cleanup
+		chrootUmountImage
+		chrootCompress
+	fi
 }
 
 
