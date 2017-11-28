@@ -1,0 +1,16 @@
+#!/bin/bash
+# Build a devuan chroot using debootstrap.
+
+chrootLabel="devuan-phone"
+
+. .fpStarter
+
+chrootRelease="jessie"
+chrootMirror=""
+packages=`chrootPackages $packagesDevuan $packagesDevelopment $packagesDesktopDevuan $packagesWork $packagesCommandLine $packagesChromePrereqs $packagesVNCServer $packagesKDE`
+
+chrootVars
+chrootBuildAll
+
+chrootVars
+

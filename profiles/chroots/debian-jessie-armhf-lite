@@ -1,0 +1,16 @@
+#!/bin/bash
+# Build a devuan chroot using debootstrap.
+
+chrootLabel="devuan-lite"
+
+. .fpStarter
+
+chrootRelease="jessie"
+chrootMirror=""
+packages="make,gcc,less,vim,netbase,wget,binutils,dpkg,apt,apt-utils,nmon,e2fsprogs,$packagesDevuan"
+
+chrootVars
+chrootBuildAll
+
+chrootVars
+
