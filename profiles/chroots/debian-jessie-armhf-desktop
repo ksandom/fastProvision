@@ -1,7 +1,7 @@
 #!/bin/bash
 # Build a devuan chroot using debootstrap.
 
-chrootLabel="devuan-phone"
+chrootLabel="debian-phone"
 
 . .fpStarter
 
