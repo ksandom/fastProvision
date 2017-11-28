@@ -3,3 +3,4 @@
 packagesDesktop="kruler"
 packagesDesktopUbuntu="firefox firefox-locale-en $packagesDesktop"
 packagesDesktopDevuan="firefox-esr firefox-esr-l10n-uk $packagesDesktop"
+packagesDesktopDebianWheezy="$packagesDesktop"
