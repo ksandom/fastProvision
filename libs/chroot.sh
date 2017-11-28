@@ -18,7 +18,7 @@ function chrootPrerequisites
 	if [ "$chrootLabel" == "" ]; then
 		export chrootImage="$chrootImageHome/$now.img"
 	else
-		export chrootImage="$chrootImageHome/$now-$chrootLabel-$arch.img"
+		export chrootImage="$chrootImageHome/$now-$chrootRelease-$chrootLabel-$arch.img"
 	fi
 	
 	mkdir -p "$mountPoint" "$chrootImageHome"
