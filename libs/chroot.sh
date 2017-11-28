@@ -1,21 +1,25 @@
 #!/bin/bash
 # Build a devuan chroot using debootstrap.
 
+# Defaults
+export chrootMirror="http://auto.mirror.devuan.org/merged/"
+export chrootRelease="jessie"
+export arch="armhf"
+export now="`date +%Y-%m-%d--%H%M%S`"
+export mountPoint=~/chroots/build/$now
+export chrootImageHome=~/chroots/images
+export blocks="4K"
+export blockSize="1M"
+export bareMinimumPackages="make,gcc,less,vim,netbase,wget,binutils,apt,apt-utils,nmon,aptitude,tasksel,curl"
+
+
 function chrootPrerequisites
 {
-	export arch="armhf"
-	export now="`date +%Y-%m-%d--%H%M%S`"
-	export mountPoint=~/chroots/build/$now
-	export chrootImageHome=~/chroots/images
-	
 	if [ "$chrootLabel" == "" ]; then
 		export chrootImage="$chrootImageHome/$now.img"
 	else
 		export chrootImage="$chrootImageHome/$now-$chrootLabel-$arch.img"
 	fi
-	export blocks="4K"
-	export blockSize="1M"
-	export bareMinimumPackages="make,gcc,less,vim,netbase,wget,binutils,apt,apt-utils,nmon,aptitude,tasksel,curl"
 	
 	mkdir -p "$mountPoint" "$chrootImageHome"
 }
@@ -75,7 +79,7 @@ function chrootMountImage
 function chrootBuildContents
 {
 	echo "Build"
-	debootstrap --no-check-gpg --include="$packages" --arch "$arch" "jessie" "$mountPoint" "http://auto.mirror.devuan.org/merged/"
+	debootstrap --no-check-gpg --include="$packages" --arch "$arch" "$chrootRelease" "$mountPoint" "$chrootMirror"
 
 	return $?
 }

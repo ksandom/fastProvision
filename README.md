@@ -1,13 +1,20 @@
 # fastProvision
 
-A fast and filthy way to provision a desktop environment.
+A fast and filthy way to provision a desktop environment and build chroot images.
 
-## Target audience
+This was initially intended as a proof of concept to prove a point. But has actually become suitable for building chroot images in a flexible, automated way.
 
-Me. But feel free to adapt it for your needs.
+## Using it.
 
-## Background
+Browse through the profiles directory structure and find the thing that most closely matches your situation. Feel free to add more. Once you've found what you're looking for, just give it a run.
 
-Tools like Ansible and Puppet are incredibly slow and heavy. The goal of this is to get a machine up and running *fast*.
+    sudo ./profiles/chroots/devuan-jezzie-armhf-desktop
 
-The biggest part of this is letting mature tools excel at what they do rather than micro-managing them.
+## Contributing
+
+Make pull requests! :)
+
+Stuff that's particularly useful
+* Automate stuff in /libs that can be included in /profiles.
+* Create profiles.
+
