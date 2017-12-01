@@ -1,0 +1,14 @@
+#!/bin/bash
+# Build a devuan chroot using debootstrap.
+
+chrootLabel="gentoo-phone"
+
+. .fpStarter
+
+packages=''
+
+chrootVars
+chrootGentooBuildAll
+
+chrootVars
+
