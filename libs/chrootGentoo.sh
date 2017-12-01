@@ -21,7 +21,7 @@ function chrootGentooGetTarballName
 function chrootGentooExtractTarball
 {
 	echo "Extract the tarball."
-	tar -C "$mountPoint" -xjf "$stage3CacheName"
+	tar -C "$mountPoint" -xjpf "$stage3CacheName"
 }
 
 function chrootGentooBuildAll
