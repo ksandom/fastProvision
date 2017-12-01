@@ -5,11 +5,6 @@
 export chrootMirror="http://auto.mirror.devuan.org/merged/"
 export chrootRelease="jessie"
 export arch="armhf"
-export now="`date +%Y-%m-%d--%H%M%S`"
-export mountPoint=~/chroots/build/$now
-export chrootImageHome=~/chroots/images
-export blocks="4K"
-export blockSize="1M"
 export bareMinimumPackages="make,gcc,less,vim,netbase,wget,binutils,apt,apt-utils,nmon,aptitude,tasksel,curl"
 
 
@@ -22,11 +17,6 @@ function chrootPrerequisites
 	fi
 	
 	mkdir -p "$mountPoint" "$chrootImageHome"
-}
-
-function chrootRun
-{
-	chroot "$mountPoint" "$@"
 }
 
 function chrootVars
@@ -59,57 +49,12 @@ function chrootGetImage
 	echo "$chrootImage"
 }
 
-function chrootCreateBareImage
-{
-	echo "Create chrootImage."
-	dd if=/dev/zero of="$chrootImage" bs="$blockSize" count=1 seek="$blocks" && \
-	mkfs.ext4 "$chrootImage"
-
-	return $?
-}
-
-function chrootMountImage
-{
-	echo "Mount"
-	mount -o loop "$chrootImage" "$mountPoint"
-	
-	return $?
-}
-
 function chrootBuildContents
 {
 	echo "Build"
 	debootstrap --no-check-gpg --include="$packages" --arch "$arch" "$chrootRelease" "$mountPoint" "$chrootMirror"
 
 	return $?
-}
-
-function chrootUmountImage
-{
-	echo "Unmount"
-	umount "$mountPoint"
-
-	return $?
-}
-
-function chrootCompress
-{
-	echo "Compress"
-	gzip "$chrootImage"
-}
-
-function chrootMountExtras
-{
-	for fs in /dev /dev/pts /proc /sys; do
-		mount -o bind $fs $mountPoint$fs
-	done
-}
-
-function chrootUnMountExtras
-{
-	for fs in /dev/pts /dev /proc /sys; do
-		mount -o bind $fs $mountPoint$fs
-	done
 }
 
 function chrootBuildAll
