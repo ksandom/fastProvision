@@ -62,9 +62,7 @@ function chrootBuildAll
 	# Prepare
 	chrootPrerequisites
 	chrootCreateBareImage
-	sleep 2
 	chrootMountImage
-	sleep 2
 
 	# Main build
 	if chrootBuildContents; then
