@@ -1,0 +1,16 @@
+#!/bin/bash
+# Build a devuan chroot using debootstrap.
+
+chrootLabel="gentoo-ia64"
+
+. .fpStarter
+
+chrootGentooStage3URL="http://gentoo.ussg.indiana.edu/releases/ia64/autobuilds/current-stage3-ia64/"
+
+packages=''
+
+chrootVars
+chrootGentooBuildAll
+
+chrootVars
+

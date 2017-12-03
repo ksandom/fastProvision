@@ -1,0 +1,9 @@
+#!/bin/bash
+# Warms up the cache for building gentoo. This is mostly intended for testing, and possibly convenience, but is certainly not required. This will be done automatically when you trying building gentoo normally if the cache is not already warm from a previous run.
+
+head -n2 $0 | tail -n1
+
+. .fpStarter
+
+chrootGentooGetTarball
+chrootGentooGetPortage
