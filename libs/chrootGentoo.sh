@@ -1,13 +1,14 @@
 #!/bin/bash
 # Build a gentoo chroot.
 
-chrootGentooCache="/tmp"
+chrootGentooCache="~/chroots/cache"
 chrootGentooStage3URL="http://distfiles.gentoo.org/releases/arm/autobuilds/current-stage3-armv6j_hardfp/"
 chrootGentooPortageURL="http://distfiles.gentoo.org/snapshots/"
 chrootGentooPortageFile="portage-latest.tar.bz2"
 
 function chrootGentooPrerequisites
 {
+	mkdir -p "$chrootGentooCache"
 	export chrootGentooPortageFullURL="$chrootGentooPortageURL$chrootGentooPortageFile"
 	export chrootGentooPortageFullFile="$chrootGentooCache/$chrootGentooPortageFile"
 }

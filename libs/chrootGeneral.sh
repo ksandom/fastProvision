@@ -65,6 +65,7 @@ function chrootCreateBareImage
 
 export now="`date +%Y-%m-%d--%H%M%S`"
 chrootUseBuildDir $now
-export chrootImageHome=~/chroots/images
+export chrootHome=~/chroots
+export chrootImageHome=$chrootHome/images
 export blocks="4K"
 export blockSize="1M"
