@@ -1,12 +1,6 @@
 #!/bin/bash
 # General stuff for working with a chroot.
 
-export now="`date +%Y-%m-%d--%H%M%S`"
-chrootUseBuildDir $now
-export chrootImageHome=~/chroots/images
-export blocks="4K"
-export blockSize="1M"
-
 function chrootUseBuildDir
 {
 	if [ "$1" != "" ]; then
@@ -69,3 +63,8 @@ function chrootCreateBareImage
 }
 
 
+export now="`date +%Y-%m-%d--%H%M%S`"
+chrootUseBuildDir $now
+export chrootImageHome=~/chroots/images
+export blocks="4K"
+export blockSize="1M"
