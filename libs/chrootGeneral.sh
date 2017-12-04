@@ -41,11 +41,9 @@ function chrootCompress
 
 function chrootMountExtras
 {
-	for fs in /dev /proc /sys; do
+	for fs in /dev /dev/pts /proc /sys; do
 		mount -o bind $fs $mountPoint$fs
 	done
-	
-	mount -o rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000 devpts $mountPoint/dev/pts -t devpts
 }
 
 function chrootUnMountExtras
