@@ -1,0 +1,10 @@
+#!/bin/bash
+# Enteres a mounted chroot directory.
+
+head -n2 $0 | tail -n1
+
+. .fpStarter
+
+chrootUseBuildDir "$1"
+
+chrootRun "bash"

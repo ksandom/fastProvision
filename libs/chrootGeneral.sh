@@ -2,10 +2,21 @@
 # General stuff for working with a chroot.
 
 export now="`date +%Y-%m-%d--%H%M%S`"
-export mountPoint=~/chroots/build/$now
+chrootUseBuildDir $now
 export chrootImageHome=~/chroots/images
 export blocks="4K"
 export blockSize="1M"
+
+function chrootUseBuildDir
+{
+	if [ "$1" != "" ]; then
+		buildName="$1"
+	else
+		buildName="`ls -1 ~/chroots/build/ | sort -u | tail -n1`"
+	fi
+	
+	export mountPoint=~/chroots/build/$buildName
+}
 
 function chrootRun
 {
