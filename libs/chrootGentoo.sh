@@ -75,6 +75,7 @@ function chrootGentooBuildBuildTools
 	chrootRun emerge -1 sys-devel/binutils && \
 	chrootRun emerge -1 sys-libs/glibc && \
 	chrootRun emerge -e @world
+	chrootRun emerge --depclean
 }
 
 function chrootGentooBuildAll
