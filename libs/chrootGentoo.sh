@@ -23,7 +23,8 @@ function chrootGentooGetTarball
 
 function chrootGentooGetTarballName
 {
-	curl "$chrootGentooStage3URL" | grep 'href="stage' | sed 's/^.*href=//g' | cut -d\" -f2 | grep '\.bz2$'
+	# TODO At the moment this will get the correct image for AMD64 by luck. It really needs to be foltered correctly so that it will be reliable, while still working for other architectures.
+	curl "$chrootGentooStage3URL" | grep 'href="stage' | sed 's/^.*href=//g' | cut -d\" -f2 | grep '\.bz2$' | head -n 1
 }
 
 function chrootGentooGetPortage
@@ -47,7 +48,7 @@ function chrootGentooExtractPortage
 function chrootGentooPlaceHardCodedConfigs
 {
 	echo "Place hard coded configs."
-	cp -R usefulStuff/gentoo/* "$mountPoint"
+	cp -R $startDir/usefulStuff/gentoo/* "$mountPoint"
 }
 
 function chrootGentooBuildAll
