@@ -15,6 +15,8 @@ function chrootUseBuildDir
 function chrootRun
 {
 	chroot "$mountPoint" "$@"
+	
+	return $?
 }
 
 function chrootMountImage
