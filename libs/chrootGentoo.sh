@@ -56,7 +56,7 @@ function chrootGentooPlaceHardCodedConfigs
 
 function chrootGentooSetupDNS
 {
-	echo "nameserver 8.8.8.8" > "$mountPoint/etc/resolv.conf"
+	cp /etc/resolv.conf "$mountPoint/etc/resolv.conf"
 }
 
 function chrootGentooSetCompileThreads
