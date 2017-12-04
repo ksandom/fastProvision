@@ -41,15 +41,16 @@ function chrootCompress
 
 function chrootMountExtras
 {
-	for fs in /dev /dev/pts /proc /sys; do
-		mount -o bind $fs $mountPoint$fs
+	mount -t proc none $mountPoint/proc
+	for fs in /dev /sys; do
+		mount --rbind $fs $mountPoint$fs
 	done
 }
 
 function chrootUnMountExtras
 {
-	for fs in /dev/pts /dev /proc /sys; do
-		mount -o bind $fs $mountPoint$fs
+	for fs in /dev /proc /sys; do
+		umount $mountPoint$fs
 	done
 }
 
