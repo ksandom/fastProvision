@@ -5,6 +5,8 @@ chrootLabel="gentoo-phone"
 
 . .fpStarter
 
+blocks="8K"
+
 packages=''
 
 chrootVars
