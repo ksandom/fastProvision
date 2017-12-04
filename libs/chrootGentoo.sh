@@ -53,6 +53,14 @@ function chrootGentooPlaceHardCodedConfigs
 	cp -R $startDir/usefulStuff/gentoo/* "$mountPoint"
 }
 
+function chrootGentooBuildBuildTools
+{
+	chrootRun emerge -1 sys-devel/gcc && \
+	chrootRun emerge -1 sys-devel/binutils && \
+	chrootRun emerge -1 sys-libs/glibc && \
+	chrootRun emerge -e @world
+}
+
 function chrootGentooBuildAll
 {
 	# Get config and directories sorted.
@@ -73,13 +81,16 @@ function chrootGentooBuildAll
 	
 	# Configure.
 	chrootGentooPlaceHardCodedConfigs
+	chrootMountExtras
 	
 	# Build build tools.
+	chrootGentooBuildBuildTools
 	
 	# Retrieve all packages.
 	
 	# Build all pacakges.
 	
 	# Cleanup.
+	chrootUnMountExtras
 }
 
