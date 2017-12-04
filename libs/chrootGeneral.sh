@@ -45,6 +45,8 @@ function chrootMountExtras
 	for fs in /dev /sys; do
 		mount --rbind $fs $mountPoint$fs
 	done
+	
+	mkdir-p $mountPoint/run/shm
 }
 
 function chrootUnMountExtras
