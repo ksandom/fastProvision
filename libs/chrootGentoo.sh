@@ -19,6 +19,7 @@ function chrootGentooGetTarball
 	export stage3CacheName="$chrootGentooCache/$stage3Name"
 	
 	wget --continue "$chrootGentooStage3URL/$stage3Name" -O "$stage3CacheName"
+	# TODO Verify the download.
 }
 
 function chrootGentooGetTarballName
@@ -31,6 +32,7 @@ function chrootGentooGetPortage
 {
 	echo "Get portage."
 	wget --continue "$chrootGentooPortageFullURL" -O "$chrootGentooPortageFullFile"
+	# TODO Verify the download.
 }
 
 function chrootGentooExtractTarball
