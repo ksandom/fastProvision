@@ -53,6 +53,21 @@ function chrootGentooPlaceHardCodedConfigs
 	cp -R $startDir/usefulStuff/gentoo/* "$mountPoint"
 }
 
+function chrootGentooSetupDNS
+{
+	echo "nameserver 8.8.8.8" > "$mountPoint/etc/resolv.conf"
+}
+
+function chrootGentooSetCompileThreads
+{
+	echo "MAKEOPTS=\"-j5\"" >> "$mountPoint/etc/portage/make.conf"
+}
+
+function chrootGentooSetupUSEFlags
+{
+	echo "USR=\"-systemd\"" >> "$mountPoint/etc/portage/make.conf"
+}
+
 function chrootGentooBuildBuildTools
 {
 	chrootRun emerge -1 sys-devel/gcc && \
@@ -80,7 +95,9 @@ function chrootGentooBuildAll
 	chrootGentooExtractPortage
 	
 	# Configure.
-	chrootGentooPlaceHardCodedConfigs
+	chrootGentooSetupDNS
+	chrootGentooSetupUSEFlags
+	#chrootGentooPlaceHardCodedConfigs
 	chrootMountExtras
 	
 	# Build build tools.
