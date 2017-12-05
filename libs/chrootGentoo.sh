@@ -66,7 +66,7 @@ function chrootGentooSetCompileThreads
 
 function chrootGentooSetupUSEFlags
 {
-	echo "USR=\"-systemd\"" >> "$mountPoint/etc/portage/make.conf"
+	echo "USE=\"-systemd\"" >> "$mountPoint/etc/portage/make.conf"
 }
 
 function chrootGentooKDEProfile
@@ -79,6 +79,13 @@ function chrootGentooKDEProfile
 function chrootGentooInstallKDE
 {
 	chrootGentooKDEProfile
+	# TODO dbus
+	# TODO polkit
+	# TODO udisks
+	# TODO udev
+	# TODO consolekit
+	# TODO elogind - maybe not needed?
+	# TODO systemd - for sessions tracker. I don't think this is needed for my usecase.
 }
 
 function chrootGentooBuildBuildTools
