@@ -69,6 +69,18 @@ function chrootGentooSetupUSEFlags
 	echo "USR=\"-systemd\"" >> "$mountPoint/etc/portage/make.conf"
 }
 
+function chrootGentooKDEProfile
+{
+	profileNumber=`chrootRun eselect profile list | grep plasma | grep -v systemd | cut -d\[ -f2 | cut -d\] -f1 | tail -n 1`
+	echo "Choosing plasma profile $profileNumber."
+	chrootRun eselect profile set $profileNumber
+}
+
+function chrootGentooInstallKDE
+{
+	chrootGentooKDEProfile
+}
+
 function chrootGentooBuildBuildTools
 {
 	chrootRun emerge -1 sys-devel/gcc && \
