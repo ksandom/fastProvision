@@ -7,6 +7,6 @@ head -n2 $0 | tail -n1
 
 chrootUseBuildDir "$1"
 
-# TODO kate kwrite konsonle
-# TODO git vim
 
+
+chrootRun kate kwrite konsole vim dev-vcs/git
