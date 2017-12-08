@@ -69,6 +69,12 @@ function chrootGentooSetupUSEFlags
 	echo "USE=\"-systemd\"" >> "$mountPoint/etc/portage/make.conf"
 }
 
+function chrootGentooRemoveMMX
+{
+	sed -i 's/^CPU_FLAGS_X86=".*"/CPU_FLAGS_X86=""/g'
+	sed -i 's/^CFLAGS=".*"/CFLAGS="-O2 -pipe -march=native -mtune=native"/g'
+}
+
 function chrootGentooKDEProfile
 {
 	profileNumber=`chrootRun eselect profile list | grep plasma | grep -v systemd | cut -d\[ -f2 | cut -d\] -f1 | tail -n 1`
@@ -92,6 +98,7 @@ function chrootGentooInstallKDE
 	# TODO consolekit
 	# TODO elogind - maybe not needed?
 	# TODO systemd - for sessions tracker. I don't think this is needed for my usecase.
+	chrootRun emerge -e @world
 }
 
 function chrootGentooBuildBuildTools
@@ -100,8 +107,14 @@ function chrootGentooBuildBuildTools
 	chrootRun emerge -1 sys-devel/gcc && \
 	chrootRun emerge -1 sys-devel/binutils && \
 	chrootRun emerge -1 sys-libs/glibc && \
+	chrootRun emerge vim && \
 	chrootRun emerge -e @world && \
 	chrootRun emerge --depclean
+}
+
+function chrootGentooBasicGraphicalChrooting
+{
+	chrootRun emerge tigervnc
 }
 
 function chrootGentooBuildAll
@@ -124,16 +137,50 @@ function chrootGentooBuildAll
 	
 	# Configure.
 	chrootGentooSetupDNS
+	chrootGentooRemoveMMX
 	chrootGentooSetupUSEFlags
-	#chrootGentooPlaceHardCodedConfigs
+	chrootGentooPlaceHardCodedConfigs
 	chrootMountExtras
 	
 	# Build build tools.
 	chrootGentooBuildBuildTools
 	
-	# Retrieve all packages.
+	# Build graphical stuff
+	chrootGentooBasicGraphicalChrooting
+	chrootGentooInstallKDE
 	
-	# Build all pacakges.
+	
+	# Cleanup.
+	chrootUnMountExtras
+}
+
+function chrootGentooBuildLite
+{
+	# Get config and directories sorted.
+	chrootPrerequisites
+	chrootGentooPrerequisites
+	
+	# Create the blank image.
+	chrootCreateBareImage
+	chrootMountImage
+	
+	# Get starting point.
+	chrootGentooGetTarball
+	chrootGentooGetPortage
+	
+	# Place the initial contents.
+	chrootGentooExtractTarball
+	chrootGentooExtractPortage
+	
+	# Configure.
+	chrootGentooSetupDNS
+	chrootGentooRemoveMMX
+	chrootGentooSetupUSEFlags
+	chrootGentooPlaceHardCodedConfigs
+	chrootMountExtras
+	
+	# Build build tools.
+	chrootGentooBuildBuildTools
 	
 	# Cleanup.
 	chrootUnMountExtras
