@@ -90,7 +90,6 @@ function chrootGentooKDEPrerequisites
 
 function chrootGentooInstallKDE
 {
-	chrootGentooKDEProfile
 	# TODO dbus
 	# TODO polkit
 	# TODO udisks
@@ -98,7 +97,7 @@ function chrootGentooInstallKDE
 	# TODO consolekit
 	# TODO elogind - maybe not needed?
 	# TODO systemd - for sessions tracker. I don't think this is needed for my usecase.
-	chrootRun emerge -e @world
+	chrootRun emerge -n @world
 }
 
 function chrootGentooBuildBuildTools
@@ -173,6 +172,7 @@ function chrootGentooBuildLite
 	chrootGentooExtractPortage
 	
 	# Configure.
+	chrootGentooKDEProfile
 	chrootGentooSetupDNS
 	chrootGentooRemoveMMX
 	chrootGentooSetupUSEFlags
@@ -181,6 +181,8 @@ function chrootGentooBuildLite
 	
 	# Build build tools.
 	chrootGentooBuildBuildTools
+	chrootGentooBasicGraphicalChrooting
+	chrootGentooInstallKDE
 	
 	# Cleanup.
 	chrootUnMountExtras
