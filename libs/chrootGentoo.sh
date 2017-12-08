@@ -76,6 +76,12 @@ function chrootGentooKDEProfile
 	chrootRun eselect profile set $profileNumber
 }
 
+function chrootGentooKDEPrerequisites
+{
+	# TODO finish this chrootRun emerge 
+	echo "###### this isn't finished."
+}
+
 function chrootGentooInstallKDE
 {
 	chrootGentooKDEProfile
@@ -90,6 +96,7 @@ function chrootGentooInstallKDE
 
 function chrootGentooBuildBuildTools
 {
+	chrootGentooKDEProfile
 	chrootRun emerge -1 sys-devel/gcc && \
 	chrootRun emerge -1 sys-devel/binutils && \
 	chrootRun emerge -1 sys-libs/glibc && \
