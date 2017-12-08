@@ -71,8 +71,8 @@ function chrootGentooSetupUSEFlags
 
 function chrootGentooRemoveMMX
 {
-	sed -i 's/^CPU_FLAGS_X86=".*"/CPU_FLAGS_X86=""/g' /etc/portage/make.conf
-	sed -i 's/^CFLAGS=".*"/CFLAGS="-O2 -pipe -march=native -mtune=native"/g' /etc/portage/make.conf
+	chrootRun sed -i 's/^CPU_FLAGS_X86=".*"/CPU_FLAGS_X86=""/g' /etc/portage/make.conf
+	chrootRun sed -i 's/^CFLAGS=".*"/CFLAGS="-O2 -pipe -march=native -mtune=native"/g' /etc/portage/make.conf
 }
 
 function chrootGentooKDEProfile
