@@ -103,7 +103,10 @@ function chrootGentooInstallKDE
 	# TODO consolekit
 	# TODO elogind - maybe not needed?
 	# TODO systemd - for sessions tracker. I don't think this is needed for my usecase.
-	chrootRun emerge -n @world
+	chrootRun emerge -n @world && \
+	chrootRun emerge kde-plasma/plasma-meta
+	
+	return $?
 }
 
 function chrootGentooBuildBuildTools
@@ -112,14 +115,18 @@ function chrootGentooBuildBuildTools
 	chrootRun emerge -1 sys-devel/gcc && \
 	chrootRun emerge -1 sys-devel/binutils && \
 	chrootRun emerge -1 sys-libs/glibc && \
-	chrootRun emerge vim && \
+	chrootRun emerge vim esearch && \
+	chrootRun eupdatedb && \
 	chrootRun emerge -e @world && \
 	chrootRun emerge --depclean
+	
+	return $?
 }
 
 function chrootGentooBasicGraphicalChrooting
 {
-	chrootRun emerge tigervnc
+	chrootRun emerge tigervnc xterm
+	chrootRun chmod 755 /etc/X11/xinit/xinitrc
 }
 
 function chrootGentooBuildAll
