@@ -136,8 +136,8 @@ function chrootGentooBuildAll
 	chrootGentooPrerequisites
 	
 	# Get starting point.
-	chrootGentooGetTarball
 	chrootGentooGetPortage
+	chrootGentooGetTarball
 	
 	# Create the blank image.
 	chrootCreateBareImage
@@ -175,8 +175,8 @@ function chrootGentooBuildLite
 	chrootGentooPrerequisites
 	
 	# Get starting point.
-	chrootGentooGetTarball
 	chrootGentooGetPortage
+	chrootGentooGetTarball
 	
 	# Create the blank image.
 	chrootCreateBareImage
