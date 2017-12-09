@@ -75,6 +75,12 @@ function chrootGentooRemoveMMX
 	chrootRun sed -i 's/^CFLAGS=".*"/CFLAGS="-O2 -pipe -march=native -mtune=native"/g' /etc/portage/make.conf
 }
 
+function chrootGentooHackPortageConfigIssue
+{
+	echo "############# Applying short term hack for missmatch between portage and the base image. #############"
+	chrootRun ln -s /usr/portage /usr/portage/gentoo
+}
+
 function chrootGentooKDEProfile
 {
 	profileNumber=`chrootRun eselect profile list | grep plasma | grep -v systemd | cut -d\[ -f2 | cut -d\] -f1 | tail -n 1`
@@ -122,19 +128,21 @@ function chrootGentooBuildAll
 	chrootPrerequisites
 	chrootGentooPrerequisites
 	
-	# Create the blank image.
-	chrootCreateBareImage
-	chrootMountImage
-	
 	# Get starting point.
 	chrootGentooGetTarball
 	chrootGentooGetPortage
+	
+	# Create the blank image.
+	chrootCreateBareImage
+	chrootMountImage
 	
 	# Place the initial contents.
 	chrootGentooExtractTarball
 	chrootGentooExtractPortage
 	
 	# Configure.
+	chrootGentooHackPortageConfigIssue
+	chrootGentooKDEProfile
 	chrootGentooSetupDNS
 	chrootGentooRemoveMMX
 	chrootGentooSetupUSEFlags
@@ -159,20 +167,20 @@ function chrootGentooBuildLite
 	chrootPrerequisites
 	chrootGentooPrerequisites
 	
-	# Create the blank image.
-	chrootCreateBareImage
-	chrootMountImage
-	
 	# Get starting point.
 	chrootGentooGetTarball
 	chrootGentooGetPortage
+	
+	# Create the blank image.
+	chrootCreateBareImage
+	chrootMountImage
 	
 	# Place the initial contents.
 	chrootGentooExtractTarball
 	chrootGentooExtractPortage
 	
 	# Configure.
-	chrootGentooKDEProfile
+	chrootGentooHackPortageConfigIssue
 	chrootGentooSetupDNS
 	chrootGentooRemoveMMX
 	chrootGentooSetupUSEFlags
