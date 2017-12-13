@@ -1,0 +1,36 @@
+#!/bin/bash
+# Build a gentoo chroot using debootstrap. Normally you'll want to use gentoo-armhf-desktop. But if you have resource issues, you may want to use part1 and part2 with qemu.
+
+chrootLabel="gentoo-phone"
+
+. .fpStarter
+
+blocks="8K"
+
+packages=''
+
+chrootVars
+
+# Do this intial stuff to create the image.
+	# Prep
+	if [ ! -e "/mnt/chroot" ]; then
+		echo "/mnt/chroot does not appear to exist. Please create and mount it."
+		exit 1
+	fi
+	chrootUseBuildDir "/mnt/chroot"
+	
+	chrootMountExtras
+	
+	# Build build tools.
+	chrootGentooBuildBuildTools
+	
+	# Build graphical stuff
+	chrootGentooBasicGraphicalChrooting
+	chrootGentooInstallKDE
+	
+	
+	# Cleanup.
+	chrootUnMountExtras
+
+chrootVars
+

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Build a devuan chroot using debootstrap.
+# Build a gentoo chroot using debootstrap.
 
 chrootLabel="gentoo-phone"
 
