@@ -1,0 +1,33 @@
+#!/bin/bash
+# Prepare a Raspberry Pi image for running in QEMU.
+# Requires parameters: $0 imageFile
+
+if [ "$1" == "" ]; then
+	tail -n+2 $0 | head -n 2
+	exit 1
+else
+	tail -n+2 $0 | head -n 1
+fi
+
+. .fpStarter
+
+
+# Do manipulation if it is needed.
+mountSubParition "$1" "2" ~/chroots/build/pi
+sed -i 's/^\//#\//g' ~/chroots/build/pi/etc/ld.so.preload
+
+umount ~/chroots/build/pi
+
+# Get stuff for booting the pi.
+# mountSubParition "$1" "1" ~/chroots/build/pi-boot
+# mkdir -p ~/chroots/build/pi-kernels
+# cp -v ~/chroots/build/pi-boot/kernel*img ~/chroots/build/pi-kernels
+# umount ~/chroots/build/pi-boot
+
+git clone https://github.com/dhruvvyas90/qemu-rpi-kernel ~/chroots/build/pi-kernels
+
+mkdir -p ~/chroots/build/swapdir
+mount -t tmpfs tmpfs ~/chroots/build/swapdir
+dd if=/dev/zero of=~/chroots/build/swapdir/swap.img
+swapImage=~/chroots/build/swapdir/swap.img
+dd if=/dev/zero of="$swapImage" bs="$blockSize" count=1 seek="10K"
