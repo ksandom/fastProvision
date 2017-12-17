@@ -1,6 +1,8 @@
 #!/bin/bash
 # Setup scratchbox on ubuntu/debian. See http://www.scratchbox.org for more info.
 
+echo "WARNING: This is currently broken on my machine. Once I find a better solution, I'll provide automation for it."
+
 . .fpStarter
 
 scratchboxAptBasedInstall
