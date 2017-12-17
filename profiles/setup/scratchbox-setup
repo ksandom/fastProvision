@@ -1,0 +1,8 @@
+#!/bin/bash
+# Sets up the scratchbox that we will use to build the image.
+
+. .fpStarter
+
+createScratchbox
+
+
