@@ -16,15 +16,17 @@ function createScratchbox
 	# Adapted from: Sailfish HardwareAdaptionDevelopmentKiti 1.1.2  documentaion.
 
 	# Download the image.
-	NAME=fp
+	NAME=fp2
 	PORT_ARCH=armv7hl
 	SFE_SB2_TARGET=~/chroots/build/sb2
+	DLFILE=~/chroots/cache/sbimage.tar.bz2
 	TARBALL_URL=http://releases.sailfishos.org/sdk/latest/targets/targets.json
 	TARBALL=$(curl $TARBALL_URL | grep "$PORT_ARCH.tar.bz2" | cut -d\" -f4)
-	wget --continue "$TARBALL" -O ~/chroots/cache/sbimage.tar.bz2
+	[-e $DLFILE ] || curl "$TARBALL" -o $DLFILE
 	sudo mkdir -p $SFE_SB2_TARGET
-	sudo tar --numeric-owner -pxjf $(basename $TARBALL) -C $SFE_SB2_TARGET
+	sudo tar --numeric-owner -pxjf $DLFILE -C $SFE_SB2_TARGET
 	sudo chown -R $USER $SFE_SB2_TARGET
+	cd $SFE_SB2_TARGET
 	grep :$(id -u): /etc/passwd >> $SFE_SB2_TARGET/etc/passwd
 	grep :$(id -g): /etc/group >> $SFE_SB2_TARGET/etc/group
 
