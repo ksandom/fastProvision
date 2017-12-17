@@ -28,13 +28,7 @@ chrootVars
 	chrootGentooExtractTarball
 	chrootGentooExtractPortage
 	
-	# Configure.
-	chrootGentooHackPortageConfigIssue
-	chrootGentooKDEProfile
-	chrootGentooSetupDNS
-	chrootGentooRemoveMMX
-	chrootGentooSetupUSEFlags
-	chrootGentooPlaceHardCodedConfigs
-
+	chrootMountExtras
+	
 chrootVars
 

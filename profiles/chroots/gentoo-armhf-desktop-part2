@@ -13,13 +13,16 @@ chrootVars
 
 # Do this intial stuff to create the image.
 	# Prep
-	if [ ! -e "/mnt/chroot" ]; then
-		echo "/mnt/chroot does not appear to exist. Please create and mount it."
-		exit 1
-	fi
-	chrootUseBuildDir "/mnt/chroot"
+	chrootUseBuildDir "$1"
 	
-	chrootMountExtras
+	
+	# Configure.
+	chrootGentooHackPortageConfigIssue
+	chrootGentooKDEProfile
+	chrootGentooSetupDNS
+	chrootGentooRemoveMMX
+	chrootGentooSetupUSEFlags
+	chrootGentooPlaceHardCodedConfigs
 	
 	# Build build tools.
 	chrootGentooBuildBuildTools
