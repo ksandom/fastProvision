@@ -31,7 +31,7 @@ function chrootGentooGetTarballName
 
 function chrootGentooGetPortage
 {
-	echo "Get portage."
+	echo "Get portage to $chrootGentooPortageFullFile."
 	wget --continue "$chrootGentooPortageFullURL" -O "$chrootGentooPortageFullFile"
 	# TODO Verify the download.
 }
