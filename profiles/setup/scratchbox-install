@@ -1,0 +1,7 @@
+#!/bin/bash
+# Setup scratchbox on ubuntu/debian. See http://www.scratchbox.org for more info.
+
+. .fpStarter
+
+scratchboxAptBasedInstall
+
