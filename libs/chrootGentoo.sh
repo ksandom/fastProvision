@@ -78,7 +78,7 @@ function chrootGentooRemoveMMX
 function chrootGentooHackPortageConfigIssue
 {
 	echo "############# Applying short term hack for missmatch between portage and the base image. #############"
-	chrootRun ln -s /usr/portage /usr/portage/gentoo
+	[ -e /usr/portage/gentoo ] || chrootRun ln -s /usr/portage /usr/portage/gentoo
 }
 
 function chrootGentooKDEProfile
