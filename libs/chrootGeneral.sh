@@ -4,9 +4,9 @@
 function chrootUseBuildDir
 {
 	if [ "$1" != "" ]; then
-		buildName="$1"
+		export buildName="$1"
 	else
-		buildName="`ls -1 ~/chroots/build/ | sort -u | tail -n1`"
+		export buildName="`ls -1 ~/chroots/build/ | sort -u | tail -n1`"
 	fi
 	
 	export mountPoint=~/chroots/build/$buildName
@@ -14,7 +14,16 @@ function chrootUseBuildDir
 
 function chrootRun
 {
-	chroot "$mountPoint" "$@"
+	case $arch in
+		arm*)
+			echo "Run using scratchbox: $@"
+			sb2 -t "$buildName" -R "$@"
+		;;
+		*)
+			echo "Run using chroot: $@"
+			chroot "$mountPoint" "$@"
+		;;
+	esac
 	
 	return $?
 }

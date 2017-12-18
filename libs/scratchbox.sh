@@ -1,4 +1,5 @@
 # Stuff for working with scratch box.
+# Parts of this module are heavily inspired by version 1.1.2 of the Sailfish OS Hardware Adaptation Development Kit Documentation available at https://sailfishos.org/develop/hadk/ which is released under https://creativecommons.org/licenses/by-nc-sa/3.0/
 
 function scratchboxAptBasedInstall
 {
@@ -17,25 +18,28 @@ function createScratchbox
 
 	# Download the image.
 	NAME=fp2
-	PORT_ARCH=armv7hl
 	SFE_SB2_TARGET=~/chroots/build/sb2
 	DLFILE=~/chroots/cache/sbimage.tar.bz2
 	TARBALL_URL=http://releases.sailfishos.org/sdk/latest/targets/targets.json
-	TARBALL=$(curl $TARBALL_URL | grep "$PORT_ARCH.tar.bz2" | cut -d\" -f4)
+	TARBALL=$(curl $TARBALL_URL | grep "$arch.tar.bz2" | cut -d\" -f4)
 	[-e $DLFILE ] || curl "$TARBALL" -o $DLFILE
 	sudo mkdir -p $SFE_SB2_TARGET
 	sudo tar --numeric-owner -pxjf $DLFILE -C $SFE_SB2_TARGET
 	sudo chown -R $USER $SFE_SB2_TARGET
-	cd $SFE_SB2_TARGET
-	grep :$(id -u): /etc/passwd >> $SFE_SB2_TARGET/etc/passwd
-	grep :$(id -g): /etc/group >> $SFE_SB2_TARGET/etc/group
-
-	# Setup SB2.
-	sb2-init -d -L "--sysroot=/" -C "--sysroot=/" \
-		-c /usr/bin/qemu-arm-dynamic -m sdk-build \
-		-n -N -t / $NAME \
-		/opt/cross/bin/$PORT_ARCH-meego-linux-gnueabi-gcc
+	
+	scratchboxInit "$NAME" "$SFE_SB2_TARGET"
 	sb2 -t $NAME -m sdk-install -R rpm --rebuilddb
-
 }
 
+function scratchboxInit
+{
+	target="$2"
+	name="$1"
+	
+	cd $target
+	grep :$(id -u): /etc/passwd >> $target/etc/passwd
+	grep :$(id -g): /etc/group >> $target/etc/group
+
+	# Setup SB2.
+	sb2-init -d -L "--sysroot=/" -C "--sysroot=/" -c /usr/bin/qemu-arm-dynamic -m sdk-build -n -N -t / $name /opt/cross/bin/$arch-meego-linux-gnueabi-gcc
+}

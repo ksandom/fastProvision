@@ -8,6 +8,7 @@ chrootLabel="gentoo-phone"
 blocks="8K"
 
 packages=''
+arch=armv7hl
 
 chrootVars
 
@@ -28,7 +29,8 @@ chrootVars
 	chrootGentooExtractTarball
 	chrootGentooExtractPortage
 	
-	chrootMountExtras
+	# Create scratchbox.
+	scratchboxInit "$buildName" "$mountPoint"
 	
 chrootVars
 

@@ -8,6 +8,7 @@ chrootLabel="gentoo-phone"
 blocks="8K"
 
 packages=''
+arch=armv7hl
 
 chrootVars
 
