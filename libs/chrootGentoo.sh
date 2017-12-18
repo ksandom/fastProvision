@@ -83,7 +83,16 @@ function chrootGentooHackPortageConfigIssue
 
 function chrootGentooKDEProfile
 {
-	profileNumber=`chrootRun eselect profile list | grep plasma | grep -v systemd | cut -d\[ -f2 | cut -d\] -f1 | tail -n 1`
+	case $arch in
+		arm*)
+			echo "Choosing the profile for arm." >&2
+			profileNumber=`chrootRun eselect profile list | grep desktop | grep -v gnome | cut -d\[ -f2 | cut -d\] -f1 | tail -n 1`
+		;;
+		*)
+			echo "Choosing the profile for non-arm." >&2
+			profileNumber=`chrootRun eselect profile list | grep plasma | grep -v systemd | cut -d\[ -f2 | cut -d\] -f1 | tail -n 1`
+		;;
+	esac
 	echo "Choosing plasma profile $profileNumber."
 	chrootRun eselect profile set $profileNumber
 }
