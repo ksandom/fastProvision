@@ -16,7 +16,7 @@ function chrootRun
 {
 	case $arch in
 		arm*)
-			echo "Run using scratchbox: $@"
+			echo "Run using scratchbox ("$buildName"): $@"
 			sb2 -t "$buildName" -R "$@"
 		;;
 		*)
