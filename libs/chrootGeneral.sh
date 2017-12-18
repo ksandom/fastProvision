@@ -16,11 +16,11 @@ function chrootRun
 {
 	case $arch in
 		arm*)
-			echo "Run using scratchbox ("$buildName"): $@"
+			echo "Run using scratchbox ("$buildName"): $@" >&3
 			sb2 -t "$buildName" -R "$@"
 		;;
 		*)
-			echo "Run using chroot: $@"
+			echo "Run using chroot: $@" >&3
 			chroot "$mountPoint" "$@"
 		;;
 	esac
