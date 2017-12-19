@@ -1,0 +1,16 @@
+#!/bin/bash
+# Build a gentoo chroot using debootstrap.
+
+chrootLabel="gentoo-phone"
+
+. .fpStarter
+
+blocks="8K"
+
+packages=''
+
+chrootVars
+chrootGentooBuildAll
+
+chrootVars
+
