@@ -77,7 +77,16 @@ function chrootGentooSetupUSEFlags
 
 function chrootGentooRemoveMMX
 {
-	chrootRun sed -i 's/^CPU_FLAGS_X86=".*"/CPU_FLAGS_X86=""/g' /etc/portage/make.conf
+	case $arch in
+		armv7hl)
+			echo "No arm specific CPU flags yet." >&2
+		;;
+		*)
+			echo "X86 specific flags." >&2
+			chrootRun sed -i 's/^CPU_FLAGS_X86=".*"/CPU_FLAGS_X86=""/g' /etc/portage/make.conf
+		;;
+	esac
+	
 	chrootRun sed -i 's/^CFLAGS=".*"/CFLAGS="-O2 -pipe -march=native -mtune=native"/g' /etc/portage/make.conf
 }
 
@@ -90,7 +99,7 @@ function chrootGentooHackPortageConfigIssue
 function chrootGentooKDEProfile
 {
 	case $arch in
-		arm*)
+		armv7hl)
 			echo "Choosing the profile for arm." >&2
 			profileNumber=`chrootRun eselect profile list | grep desktop | grep -v gnome | cut -d\[ -f2 | cut -d\] -f1 | tail -n 1`
 		;;
