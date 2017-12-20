@@ -46,6 +46,7 @@ function chrootGentooExtractPortage
 {
 	echo "Extract portage."
 	tar -C "$mountPoint/usr" -xjpf "$chrootGentooPortageFullFile"
+	chrootGentooBackupMakeConf
 }
 
 function chrootGentooPlaceHardCodedConfigs
@@ -57,6 +58,11 @@ function chrootGentooPlaceHardCodedConfigs
 function chrootGentooSetupDNS
 {
 	cp /etc/resolv.conf "$mountPoint/etc/resolv.conf"
+}
+
+function chrootGentooBackupMakeConf
+{
+	cp "$mountPoint/etc/portage/make.conf" "$mountPoint/etc/portage/make.conf.backup"
 }
 
 function chrootGentooSetCompileThreads
@@ -120,7 +126,7 @@ function chrootGentooInstallKDE
 
 function chrootGentooBuildBuildTools
 {
-	chrootGentooKDEProfile
+	#chrootGentooKDEProfile
 	chrootRun emerge -1 sys-devel/gcc && \
 	chrootRun emerge -1 sys-devel/binutils && \
 	chrootRun emerge -1 sys-libs/glibc && \
