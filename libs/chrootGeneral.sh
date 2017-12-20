@@ -15,7 +15,7 @@ function chrootUseBuildDir
 function chrootRun
 {
 	case $arch in
-		arm*)
+		armv7hl)
 			echo "Run using scratchbox ("$buildName"): $@" >&2
 			sb2 -t "$buildName" -R "$@"
 		;;
