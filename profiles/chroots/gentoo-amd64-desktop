@@ -6,6 +6,7 @@ chrootLabel="gentoo-amd64"
 . .fpStarter
 
 blocks="10K"
+darch='x86'
 
 chrootGentooStage3URL="http://gentoo.ussg.indiana.edu/releases/amd64/autobuilds/current-stage3-amd64/"
 
