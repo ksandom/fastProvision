@@ -19,7 +19,7 @@ chrootVars
 	
 	# Configure.
 	chrootGentooHackPortageConfigIssue
-	# chrootGentooKDEProfile
+	chrootGentooKDEProfile
 	chrootGentooSetupDNS
 	chrootGentooRemoveMMX
 	chrootGentooSetupUSEFlags
