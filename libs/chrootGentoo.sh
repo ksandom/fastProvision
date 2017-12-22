@@ -127,6 +127,9 @@ function chrootGentooInstallKDE
 	# TODO consolekit
 	# TODO elogind - maybe not needed?
 	# TODO systemd - for sessions tracker. I don't think this is needed for my usecase.
+	chrootRun emerge -1 --nodeps libudev && \
+	chrootRun emerge -1 --nodeps openssl && \
+	chrootRun emerge -1 qtdbus && \
 	chrootRun emerge -n @world && \
 	chrootRun emerge kde-plasma/plasma-meta
 	
