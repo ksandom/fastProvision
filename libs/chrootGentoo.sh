@@ -141,6 +141,8 @@ function chrootGentooInstallKDE
 function chrootGentooBuildBuildTools
 {
 	#chrootGentooKDEProfile
+	chrootRun emerge --sync && \
+	chrootRun emerge -1 sys-apps/portage && \
 	chrootRun emerge -1 sys-devel/gcc && \
 	chrootRun emerge -1 sys-devel/binutils && \
 	chrootRun emerge -1 sys-libs/glibc && \
