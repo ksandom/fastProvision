@@ -8,6 +8,7 @@ chrootGentooPortageFile="portage-latest.tar.bz2"
 
 function chrootGentooPrerequisites
 {
+	doing "Chroot prerequisites."
 	mkdir -p "$chrootGentooCache"
 	export chrootGentooPortageFullURL="$chrootGentooPortageURL$chrootGentooPortageFile"
 	export chrootGentooPortageFullFile="$chrootGentooCache/$chrootGentooPortageFile"
@@ -15,7 +16,7 @@ function chrootGentooPrerequisites
 
 function chrootGentooGetTarball
 {
-	echo "Get the stage3 tarball."
+	doing "Get the stage3 tarball."
 	stage3Name="`chrootGentooGetTarballName`"
 	export stage3CacheName="$chrootGentooCache/$stage3Name"
 	
@@ -31,52 +32,57 @@ function chrootGentooGetTarballName
 
 function chrootGentooGetPortage
 {
-	echo "Get portage to $chrootGentooPortageFullFile."
+	doing "Get portage to $chrootGentooPortageFullFile."
 	wget --continue "$chrootGentooPortageFullURL" -O "$chrootGentooPortageFullFile"
 	# TODO Verify the download.
 }
 
 function chrootGentooExtractTarball
 {
-	echo "Extract the tarball."
+	doing "Extract the tarball."
 	tar -C "$mountPoint" -xjpf "$stage3CacheName"
 }
 
 function chrootGentooExtractPortage
 {
-	echo "Extract portage."
+	doing "Extract portage."
 	tar -C "$mountPoint/usr" -xjpf "$chrootGentooPortageFullFile"
 	chrootGentooBackupMakeConf
 }
 
 function chrootGentooPlaceHardCodedConfigs
 {
-	echo "Place hard coded configs."
+	doing "Place hard coded configs."
 	cp -R $startDir/usefulStuff/gentoo/* "$mountPoint"
 }
 
 function chrootGentooSetupDNS
 {
+	doing "Setup DNS."
 	cp /etc/resolv.conf "$mountPoint/etc/resolv.conf"
 }
 
 function chrootGentooBackupMakeConf
 {
+	doing "Backup make.conf."
 	cp "$mountPoint/etc/portage/make.conf" "$mountPoint/etc/portage/make.conf.backup"
 }
 
 function chrootGentooSetCompileThreads
 {
+	doing "Set compile threads."
 	echo "MAKEOPTS=\"-j5\"" >> "$mountPoint/etc/portage/make.conf"
 }
 
 function chrootGentooSetupUSEFlags
 {
+	doing "Setup USE flags."
 	echo "USE=\"-systemd -vlc\"" >> "$mountPoint/etc/portage/make.conf"
 }
 
 function chrootGentooRemoveMMX
 {
+	doing "Remove MMX."
 	case $arch in
 		armv7hl)
 			echo "No arm specific CPU flags yet." >&2
@@ -92,12 +98,14 @@ function chrootGentooRemoveMMX
 
 function chrootGentooHackPortageConfigIssue
 {
+	doing "Apply short term hack for missmatch between portage and the base image."
 	echo "############# Applying short term hack for missmatch between portage and the base image. #############"
 	[ -e /usr/portage/gentoo ] || chrootRun ln -s /usr/portage /usr/portage/gentoo
 }
 
 function chrootGentooKDEProfile
 {
+	doing "KDE profile."
 	case $darch in
 		x86)
 			echo "Choosing the profile for non-arm." >&2
@@ -114,12 +122,14 @@ function chrootGentooKDEProfile
 
 function chrootGentooKDEPrerequisites
 {
+	doing "KDE Prerequisites."
 	# TODO finish this chrootRun emerge 
 	echo "###### this isn't finished."
 }
 
 function chrootGentooInstallKDE
 {
+	doing "Install KDE."
 	# TODO dbus
 	# TODO polkit
 	# TODO udisks
@@ -140,6 +150,7 @@ function chrootGentooInstallKDE
 
 function chrootGentooBuildBuildTools
 {
+	doing "Build the build tools."
 	#chrootGentooKDEProfile
 	chrootRun emerge --sync && \
 	chrootRun emerge -1 sys-apps/portage && \

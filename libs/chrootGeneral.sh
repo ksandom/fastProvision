@@ -16,11 +16,11 @@ function chrootRun
 {
 	case $arch in
 		armv7hl)
-			echo "Run using scratchbox ("$buildName"): $@" >&2
+			log "Run using scratchbox ("$buildName"): $@"
 			sb2 -t "$buildName" -R "$@"
 		;;
 		*)
-			echo "Run using chroot: $@" >&2
+			log "Run using chroot: $@"
 			chroot "$mountPoint" "$@"
 		;;
 	esac
@@ -30,7 +30,7 @@ function chrootRun
 
 function chrootMountImage
 {
-	echo "Mount"
+	doing "Mount"
 	mount -o loop "$chrootImage" "$mountPoint"
 	
 	return $?
@@ -38,7 +38,7 @@ function chrootMountImage
 
 function chrootUmountImage
 {
-	echo "Unmount"
+	doing "Unmount"
 	umount "$mountPoint"
 
 	return $?
@@ -46,7 +46,7 @@ function chrootUmountImage
 
 function chrootCompress
 {
-	echo "Compress"
+	doing "Compress"
 	gzip "$chrootImage"
 }
 
@@ -69,15 +69,19 @@ function chrootUnMountExtras
 
 function chrootCreateBareImage
 {
-	echo "Create chrootImage."
+	doing "Create chrootImage."
 	dd if=/dev/zero of="$chrootImage" bs="$blockSize" count=1 seek="$blocks" && \
 	mkfs.ext4 "$chrootImage"
 
 	return $?
 }
 
+function getNow
+{
+	date +%Y-%m-%d--%H%M%S
+}
 
-export now="`date +%Y-%m-%d--%H%M%S`"
+export now="`getNow`"
 chrootUseBuildDir $now
 export chrootHome=~/chroots
 export chrootImageHome=$chrootHome/images
