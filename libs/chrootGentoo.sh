@@ -141,7 +141,7 @@ function chrootGentooInstallKDE
 	chrootRun emerge -1 qtgui  && \
 	chrootRun emerge -1 --nodeps qtxml   && \
 	chrootRun emerge -1 perl  && \
-	chrootRun emerge -1 openssl qtcore qtdbus qtwidgets qtdeclarative qtnetwork qtxmlpatterns qttest perl && \
+	chrootRun emerge -1 --autounmask-write openssl qtcore qtdbus qtwidgets qtdeclarative qtnetwork qtxmlpatterns qttest perl && \
 	chrootRun emerge -n @world && \
 	chrootRun emerge kde-plasma/plasma-meta
 	
