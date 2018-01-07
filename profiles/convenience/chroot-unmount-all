@@ -5,9 +5,10 @@
 
 . .fpStarter
 
-requireParameters "$0" "$1"
+requireParameters "$0" "$0"
 
-chrootUseBuildDir "$1"
+chrootImage "$1"
+chrootUseBuildDir "$2"
 
 chrootUnMountExtras
 chrootUmountImage
