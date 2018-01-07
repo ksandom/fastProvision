@@ -69,10 +69,19 @@ function chrootMountExtras
 	done
 	
 	mkdir -p $mountPoint/run/shm
+	
+	if [ -e $mountPoint/usr/portage/distfiles/ ]; then
+		mkdir -p $chrootGentooCache/distfiles
+		mount -o bind $chrootGentooCache/distfiles $mountPoint/usr/portage/distfiles/
+	fi
 }
 
 function chrootUnMountExtras
 {
+	if [ -e $mountPoint/usr/portage/distfiles/ ]; then
+		umount $mountPoint/usr/portage/distfiles/
+	fi
+	
 	for fs in /dev /proc /sys; do
 		umount $mountPoint$fs
 	done
