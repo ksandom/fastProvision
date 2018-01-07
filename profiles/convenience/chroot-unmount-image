@@ -1,0 +1,12 @@
+#!/bin/bash
+# Unmount extra mounts from a mounted chroot directory.
+# Syntax:
+#   $0 [buildDirectory]
+
+. .fpStarter
+
+requireParameters "$0" "$1"
+
+chrootUseBuildDir "$1"
+
+chrootUmountImage

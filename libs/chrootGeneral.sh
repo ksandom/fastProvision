@@ -12,6 +12,17 @@ function chrootUseBuildDir
 	export mountPoint=~/chroots/build/$buildName
 }
 
+function chrootImage
+{
+	if [ "$1" != "" ]; then
+		export chrootImageName="$1"
+	else
+		export chrootImageName="`ls -1 ~/chroots/images/ | sort -u | tail -n1`"
+	fi
+	
+	export chrootImage=~/chroots/images/$chrootImageName
+}
+
 function chrootRun
 {
 	case $arch in

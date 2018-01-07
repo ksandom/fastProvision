@@ -1,0 +1,14 @@
+#!/bin/bash
+# Mount extra mounts from a mounted chroot directory.
+# Syntax $0 [image [directory]]
+#   If image is absent, it will be assumed to be the latest one.
+#   If directory is absent, it will be assumed to be the latest one.
+
+. .fpStarter
+
+requireParameters "$0" "$2"
+
+chrootImage "$1"
+chrootUseBuildDir "$2"
+
+chrootMountImage
