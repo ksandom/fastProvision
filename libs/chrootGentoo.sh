@@ -191,7 +191,7 @@ function chrootGentooBuildAll
 	
 	# Configure.
 	chrootGentooHackPortageConfigIssue
-	chrootGentooKDEProfile
+	#chrootGentooKDEProfile
 	chrootGentooSetupDNS
 	chrootGentooRemoveMMX
 	chrootGentooSetupUSEFlags
