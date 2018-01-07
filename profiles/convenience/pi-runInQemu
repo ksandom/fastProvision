@@ -1,14 +1,10 @@
 #!/bin/bash
 # Run a Pi image in QEMU.
-# Requires parameters: $0 imageFile
-
-if [ "$1" == "" ]; then
-	tail -n+2 $0 | head -n 2
-	exit 1
-else
-	tail -n+2 $0 | head -n 1
-fi
+# Syntax:
+#   $0 imageFile
 
 . .fpStarter
+
+requireParameters "$0" "$1"
 
 runQEMU "$1"

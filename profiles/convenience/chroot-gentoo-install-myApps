@@ -1,9 +1,11 @@
 #!/bin/bash
 # Enteres a mounted chroot directory.
-
-head -n2 $0 | tail -n1
+# Syntax:
+#   $0 [buildDirectory]
 
 . .fpStarter
+
+requireParameters "$0" "$1"
 
 chrootUseBuildDir "$1"
 
