@@ -77,7 +77,7 @@ function chrootGentooSetCompileThreads
 function chrootGentooSetupUSEFlags
 {
 	doing "Setup USE flags."
-	echo "USE=\"-systemd -vlc\"" >> "$mountPoint/etc/portage/make.conf"
+	echo "USE=\"X -systemd -vlc xkb pcre16\"" >> "$mountPoint/etc/portage/make.conf"
 }
 
 function chrootGentooRemoveMMX
