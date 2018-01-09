@@ -10,4 +10,4 @@ requireParameters "$0" "$0"
 
 chrootUseBuildDir "$1"
 
-tail -F "$mountPoint/var/log/emerge.log"
+tail -F "$mountPoint/var/log/"{emerge.log,fpBuild.log}
