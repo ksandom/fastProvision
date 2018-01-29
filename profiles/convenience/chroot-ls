@@ -6,5 +6,12 @@
 . .fpStarter
 
 while read build; do
-	echo "$build	`head -n1 ~/chroots/build/$build/etc/issue`"
+	fileName=~/chroots/build/$build/etc/issue
+	if [ -f "$fileName" ]; then
+		description=`head -n1 $fileName`
+	else
+		description=''
+	fi
+	
+	echo "$build	$description"
 done < <(ls -1 ~/chroots/build/$1)
