@@ -17,7 +17,7 @@ function writeToLog
 {
 	logDir="$mountPoint/var/log"
 	
-	if [ -d "$logDir" ]; then
+	if [ -d "$logDir" ] ; then
             logFile="$logDir/fpBuild.log"
             echo "`getNow` $@" >> $logFile
 	fi
@@ -29,10 +29,10 @@ function warning
 	timeRemaining="${2:-5}"
 	
 	# Display the message and countdown.
-	while [ $timeRemaining -gt 0 ]; then
+	while [ $timeRemaining -gt 0 ]; do
 		echo -n "WARNING: $message $timeRemaining "
 		let timeRemaining=$timeRemaining-1
 		sleep 1
-	fi
+	done
 	echo -n "WARNING: $message EXPIRED "
 }
