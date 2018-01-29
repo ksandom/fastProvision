@@ -1,0 +1,16 @@
+#!/bin/bash
+# Build an ubuntu chroot using debootstrap.
+
+chrootLabel="ubuntu-12.04-desktop"
+
+. .fpStarter
+
+chrootRelease="precise"
+chrootMirror="http://ports.ubuntu.com/ubuntu-ports/"
+packages="make,gcc,less,vim,netbase,wget,binutils,dpkg,apt,apt-utils,e2fsprogs"
+
+chrootVars
+chrootBuildAll
+
+chrootVars
+
