@@ -1,5 +1,5 @@
 #!/bin/bash
-# Build a devuan chroot using debootstrap.
+# Build an ubuntu chroot using debootstrap.
 
 chrootLabel="ubuntu-18.04-desktop"
 
