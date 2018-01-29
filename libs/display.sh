@@ -13,14 +13,21 @@ function log
 	writeToLog "$@"
 }
 
+function logQuietly
+{
+	writeToLog "$@"
+}
+
 function writeToLog
 {
 	logDir="$mountPoint/var/log"
 	
 	if [ -d "$logDir" ] ; then
-            logFile="$logDir/fpBuild.log"
-            echo "`getNow` $@" >> $logFile
+		logFile="$logDir/fpBuild.log"
+	else
+		logFile="/tmp/fpBuild-preImage.log"
 	fi
+	echo "`getNow` $@" >> $logFile
 }
 
 function warning
