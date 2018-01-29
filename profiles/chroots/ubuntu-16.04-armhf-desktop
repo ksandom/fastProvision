@@ -11,6 +11,9 @@ packages="make,gcc,less,vim,netbase,wget,binutils,dpkg,apt,apt-utils,e2fsprogs"
 
 chrootVars
 chrootBuildAll
+chrootRun add-apt-repository ppa:kubuntu-ppa/backports
+chrootRun apt-get install kubuntu-desktop
+
 
 chrootVars
 
