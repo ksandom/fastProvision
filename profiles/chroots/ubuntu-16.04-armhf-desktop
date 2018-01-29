@@ -14,6 +14,5 @@ chrootBuildAll
 chrootRun add-apt-repository ppa:kubuntu-ppa/backports
 chrootRun apt-get install kubuntu-desktop
 
-
 chrootVars
 
