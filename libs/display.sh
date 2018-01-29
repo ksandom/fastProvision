@@ -15,6 +15,10 @@ function log
 
 function writeToLog
 {
-	logFile="$mountPoint/var/log/fpBuild.log"
-	echo "`getNow` $@" >> $logFile
+	logDir="$mountPoint/var/log"
+	
+	if [ -d "$logDir" ]; then
+            logFile="$logDir/fpBuild.log"
+            echo "`getNow` $@" >> $logFile
+	fi
 }
