@@ -6,7 +6,7 @@ chrootLabel="ubuntu-16.04-desktop"
 . .fpStarter
 
 chrootRelease="xenial"
-chrootMirror="http://gb.archive.ubuntu.com/ubuntu/"
+chrootMirror="http://ports.ubuntu.com/ubuntu-ports/"
 packages="make,gcc,less,vim,netbase,wget,binutils,dpkg,apt,apt-utils,nmon,e2fsprogs,$packagesDevuan"
 
 chrootVars
