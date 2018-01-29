@@ -1,0 +1,8 @@
+#!/bin/bash
+# Mount a partition within an image. 
+# Syntax:
+#   $0 imageFile parititionNumber mountPoint
+
+. .fpStarter
+
+ls ~/chroots/builds/$1
