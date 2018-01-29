@@ -11,7 +11,7 @@ packages="make,gcc,less,vim,netbase,wget,binutils,dpkg,apt,apt-utils,e2fsprogs"
 
 chrootVars
 chrootBuildAll
-chrootRun apt-get install kubuntu-desktop
+chrootRun apt-get install -y kubuntu-desktop
 
 chrootVars
 
