@@ -82,9 +82,9 @@ function chrootUnMountExtras
 		umount $mountPoint/usr/portage/distfiles/
 	fi
 	
-	for fs in /dev /proc /sys; do
-		umount $mountPoint$fs
-	done
+	while read mounting; do
+		umount "$mounting"
+	done < <(mount | grep build | awk '{print $3}' | sort -r)
 }
 
 function chrootCreateBareImage
