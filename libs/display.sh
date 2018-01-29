@@ -23,7 +23,7 @@ function writeToLog
 	fi
 }
 
-function warn
+function warning
 {
 	message="$1"
 	timeRemaining="${2:-5}"

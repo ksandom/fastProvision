@@ -3,6 +3,6 @@
 
 . .fpStarter
 
-warn "This will destroy all build dirs (not important) and images (important)."
+warning "This will destroy all build dirs (not important) and images (important)."
 
 rm -Rvf ~/chroots/build/* ~/chroots/images/*
