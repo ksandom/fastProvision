@@ -13,7 +13,8 @@ chrootVars
 chrootBuildAll
 chrootRun apt-get install software-properties-common
 chrootRun add-apt-repository -y ppa:kubuntu-ppa/backports
-chrootRun apt-get install kubuntu-desktop
+chrootRun apt-get update
+chrootRun apt-get install -y plasma-desktop kwin-x11 
 
 chrootVars
 
