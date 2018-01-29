@@ -75,7 +75,8 @@ function chrootBuildAll
 
 		# Cleanup
 		chrootUmountImage
-		chrootCompress
+		
+		# chrootCompress # TODO This is fricken annoying while testing! Find a better solution for testing without crippling normal builds.
 	fi
 }
 
