@@ -6,5 +6,5 @@
 . .fpStarter
 
 while read build; do
-	echo "$build	`head -n1 ~/chroots/builds/$build/etc/issue`"
+	echo "$build	`head -n1 ~/chroots/build/$build/etc/issue`"
 done < <(ls -1 ~/chroots/build/$1)
