@@ -22,3 +22,17 @@ function writeToLog
             echo "`getNow` $@" >> $logFile
 	fi
 }
+
+function warn
+{
+	message="$1"
+	timeRemaining="${2:-5}"
+	
+	# Display the message and countdown.
+	while [ $timeRemaining -gt 0 ]; then
+		echo -n "WARNING: $message $timeRemaining "
+		let timeRemaining=$timeRemaining-1
+		sleep 1
+	fi
+	echo -n "WARNING: $message EXPIRED "
+}
