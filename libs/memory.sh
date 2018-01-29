@@ -22,7 +22,7 @@ function zswapDetect
 		swapTotal=`grep SwapTotal /proc/meminfo | awk '{print $2}'`
 		
 		if [ "$swapTotal" -lt "$zswapMemoryThresholdKB" ]; then
-			doing "zswap: Swap ($swapTotal) < threshold ($zswapMemoryThresholdKB). Enabling zswap."
+			doing "zswap: Memory ($memTotal) < threshold ($zswapMemoryThresholdKB) and swap ($swapTotal) < threshold ($zswapMemoryThresholdKB). Enabling zswap."
 			zswapTurnOn
 		else
 			log "zswap: Swap ($swapTotal) > threshold ($zswapMemoryThresholdKB). No action necessary. Note that if this is traditional swap, it may be slow. If so you could enable zswap instead by doing \`./usefulStuff/zswap.sh\`."
