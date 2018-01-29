@@ -1,0 +1,6 @@
+#!/bin/bash
+# Clean all builds and images. Use with extreme caution.
+
+. .fpStarter
+
+rm -Rvf ~/chroots/build/* ~/chroots/images/*
