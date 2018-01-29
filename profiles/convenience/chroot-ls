@@ -7,4 +7,4 @@
 
 while read build; done
 	echo "$build	`head -n1 ~/chroots/builds/$build`"
-done < <(ls -1 ~/chroots/builds/$1)
+done < <(ls -1 ~/chroots/build/$1)
